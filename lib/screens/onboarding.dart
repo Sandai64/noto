@@ -8,14 +8,12 @@ class NotoScreenOnboarding extends StatelessWidget
 
   final List<PageViewModel> _pageViewModels = [
     PageViewModel(
-      title: '',
-      body: 'Our straightforward interface makes it easier than ever to navigate, manage, and of course, read your favourite e-books.',
+      title: 'Welcome to Noto [WIP]',
+      body: 'Our straightforward interface makes it easier than ever to navigate, manage, and read your favourite e-books.',
       image: Image.asset(
         'assets/img/branding/id.png',
-        width: 256,
-        height: 256,
-        cacheHeight: 256,
-        cacheWidth: 256,
+        width: 128,
+        height: 128,
       ),
     )
   ];

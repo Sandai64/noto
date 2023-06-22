@@ -1,6 +1,9 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:noto/components/book_tile.dart';
+import 'package:noto/misc/logging.dart';
 import 'package:noto/screens/about.dart';
 import 'package:noto/screens/reader.dart';
 
@@ -23,7 +26,15 @@ class NotoScreenHome extends StatelessWidget
         ),
         actions: [
           IconButton(
-            onPressed: () => true,
+            onPressed: () async {
+                FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+                if ( result != null )
+                {
+                  File file = File(result.files.single.path!);
+                  Logging.debug("user picked valid file : ${result.files.single.path}");
+                }
+              },
             icon: const Icon(LucideIcons.plus),
           ),
 
@@ -33,48 +44,40 @@ class NotoScreenHome extends StatelessWidget
           )
         ],
       ),
-      // BODY
-      body: SingleChildScrollView(
+
+      body: const Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 8,
+          vertical: 8,
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 8,
-                right: 8,
-                bottom: 8,
+            Text(
+              'Your books',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w300
               ),
+            ),
+            Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    'Your books (WIP counter)',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w300
-                    ),
+                  Icon(
+                    LucideIcons.ban,
+                    size: 48,
                   ),
-                  // CARDS COLUMN
-                  NotoComponentsBookTile.image(
-                    heading: 'À la recherche du temps perdu',
-                    description: 'Marcel Proust',
-                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const NotoScreenReader(
-                      'title'
-                    ))),
-                    image: Image.asset(
-                      'assets/img/dummy_vh.jpg',
-                      width: 76,
-                      height: 76,
-                      cacheHeight: 76,
-                      cacheWidth: 76,
-                    ),
-                  ),
-                ],
-              ),
+                  SizedBox(height: 16),
+                  Text("Work In Progress · Not Implemented")
+                ]
+              )
             )
           ],
-        )
+        ),
       )
     );
   }

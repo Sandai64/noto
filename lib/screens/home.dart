@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:noto/components/book_tile.dart';
 import 'package:noto/misc/logging.dart';
 import 'package:noto/screens/about.dart';
 import 'package:noto/screens/reader.dart';
@@ -45,37 +46,27 @@ class NotoScreenHome extends StatelessWidget
         ],
       ),
 
-      body: const Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 8,
-          vertical: 8,
-        ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
+            const Text(
               'Your books',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w300
               ),
             ),
-            Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    LucideIcons.ban,
-                    size: 48,
-                  ),
-                  SizedBox(height: 16),
-                  Text("Work In Progress · Not Implemented")
-                ]
-              )
-            )
+            const SizedBox(height: 8),
+            // ENUMERATE BOOKS HERE
+            NotoComponentsBookTile.image(
+              heading: 'Les fleurs du mal',
+              description: "1857 · Charles Baudelaire",
+              image: Image.asset("assets/img/dummy_vh.jpg", cacheHeight: 100, cacheWidth: 100, height: 100, width: 100,)
+            ),
           ],
         ),
       )
